@@ -14,18 +14,17 @@ import lombok.NoArgsConstructor;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotBlank
     private long id;
 
-    @NotNull
-    @Size(min = 4, max = 30)
+    @NotBlank(message = "Name is required")
+    @Size(min = 4, max = 30, message = "Name must be between 4 and 30 characters")
     private String name;
 
-    @NotNull
-    @Email
+    @NotBlank(message = "Email is required")
+    @Email(message = "Email should be valid")
     private String email;
 
-    @NotNull
-    @Pattern(regexp="(^$|[0-9]{10})")
-    private long phoneNumber;
+    @NotBlank(message = "Phone number is required")
+    @Pattern(regexp="(^$|[0-9]{10})", message = "Phone number should be a 10-digit number")
+    private String phoneNumber;
 }
