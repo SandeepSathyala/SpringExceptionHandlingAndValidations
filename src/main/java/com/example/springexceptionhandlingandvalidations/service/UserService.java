@@ -2,6 +2,7 @@ package com.example.springexceptionhandlingandvalidations.service;
 
 import com.example.springexceptionhandlingandvalidations.dto.UserDto;
 import com.example.springexceptionhandlingandvalidations.entity.User;
+import com.example.springexceptionhandlingandvalidations.exception.ProcessingException;
 import com.example.springexceptionhandlingandvalidations.repository.UserRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,7 @@ import java.util.Optional;
 public class UserService {
     private final UserRepo userRepo;
 
-    public UserDto createUser(UserDto userDto){
+    public UserDto createUser(UserDto userDto) throws ProcessingException{
         User user = new User(
                 userDto.getId(),
                 userDto.getName(),
@@ -32,7 +33,7 @@ public class UserService {
         return saveUserDto;
     }
 
-    public UserDto updateUser(long id, UserDto userDto) {
+    public UserDto updateUser(long id, UserDto userDto) throws ProcessingException{
         Optional<User> userOptional = userRepo.findById(id);
 
         if (userOptional.isPresent()) {
@@ -50,10 +51,10 @@ public class UserService {
                     updatedUser.getPhoneNumber()
             );
         } else {
-            throw new IllegalArgumentException("User with id " + id + " does not exist");
+            throw new ProcessingException("User with id " + id + " does not exist");
         }
     }
-    public UserDto getUser(long id){
+    public UserDto getUser(long id) throws ProcessingException {
         Optional<User> userOptional = userRepo.findById(id);
 
         if (userOptional.isPresent()) {
@@ -66,10 +67,10 @@ public class UserService {
             );
             return userDto;
         } else {
-            throw new IllegalArgumentException("User with id " + id + " does not exist");
+            throw new ProcessingException("User with id " + id + " does not exist");
         }
     }
-    public List<UserDto> getAllUsers() {
+    public List<UserDto> getAllUsers() throws ProcessingException{
         List<User> users = userRepo.findAll();
         List<UserDto> userDtos = new ArrayList<>();
 
@@ -84,7 +85,7 @@ public class UserService {
 
         return userDtos;
     }
-    public void deleteUser(long id) {
+    public void deleteUser(long id) throws ProcessingException{
         User user = userRepo.findById(id).orElseThrow();
         if (user != null) {
             userRepo.deleteById(id);
