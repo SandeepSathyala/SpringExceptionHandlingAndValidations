@@ -54,6 +54,7 @@ public class UserService {
             throw new ProcessingException("User with id " + id + " does not exist");
         }
     }
+
     public UserDto getUser(long id) throws ProcessingException {
         Optional<User> userOptional = userRepo.findById(id);
 
@@ -70,6 +71,7 @@ public class UserService {
             throw new ProcessingException("User with id " + id + " does not exist");
         }
     }
+
     public List<UserDto> getAllUsers() throws ProcessingException{
         List<User> users = userRepo.findAll();
         List<UserDto> userDtos = new ArrayList<>();
@@ -85,6 +87,7 @@ public class UserService {
 
         return userDtos;
     }
+
     public void deleteUser(long id) throws ProcessingException{
         User user = userRepo.findById(id).orElseThrow();
         if (user != null) {
@@ -93,5 +96,4 @@ public class UserService {
             throw new IllegalArgumentException("User with id " + id + " does not exist");
         }
     }
-
 }
