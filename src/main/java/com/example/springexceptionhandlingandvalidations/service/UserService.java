@@ -15,7 +15,6 @@ import java.util.Optional;
 @AllArgsConstructor
 public class UserService {
     private final UserRepo userRepo;
-
     public UserDto createUser(UserDto userDto) throws ProcessingException{
         User user = new User(
                 userDto.getId(),
@@ -32,7 +31,6 @@ public class UserService {
         );
         return saveUserDto;
     }
-
     public UserDto updateUser(long id, UserDto userDto) throws ProcessingException{
         Optional<User> userOptional = userRepo.findById(id);
 
@@ -54,7 +52,6 @@ public class UserService {
             throw new ProcessingException("User with id " + id + " does not exist");
         }
     }
-
     public UserDto getUser(long id) throws ProcessingException {
         Optional<User> userOptional = userRepo.findById(id);
 
@@ -71,7 +68,6 @@ public class UserService {
             throw new ProcessingException("User with id " + id + " does not exist");
         }
     }
-
     public List<UserDto> getAllUsers() throws ProcessingException{
         List<User> users = userRepo.findAll();
         List<UserDto> userDtos = new ArrayList<>();
