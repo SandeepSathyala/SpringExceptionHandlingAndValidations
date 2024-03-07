@@ -14,7 +14,6 @@ public class CustomizedMsException extends ResponseEntityExceptionHandler {
         ErrorDetails errorsDetails = new ErrorDetails(ex.getMessage(), 500L,null);
         return new ResponseEntity<>(errorsDetails, HttpStatus.INTERNAL_SERVER_ERROR);
     }
-
     @ExceptionHandler(ProcessingException.class)
     public  final ResponseEntity<ErrorDetails> handleProcessingException(ProcessingException ex, WebRequest request){
         ErrorDetails errorsDetails = new ErrorDetails(ex.getMessage(), ex.getCode(),null);
