@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import java.util.List;
-
 @RestController
 @RequestMapping("/api/user")
 @Validated
@@ -29,6 +28,7 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
         }
     }
+
     @PutMapping("/updateUser/{userId}")
     public ResponseEntity<?> updateUser(@PathVariable("userId") @Min(value = 1, message = "User ID must be greater than or equal to 1") long id, @Valid @RequestBody UserDto userDto) {
         try {
@@ -38,6 +38,7 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
         }
     }
+
     @GetMapping("/getUserById/{userId}")
     public ResponseEntity<?> getUserById(@PathVariable("userId") @Min(value = 1, message = "User ID must be greater than or equal to 1") long id) {
         try {
@@ -47,6 +48,7 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
         }
     }
+
     @GetMapping("/getAllUsers")
     public ResponseEntity<?> getAllUsers() {
         try {
@@ -56,6 +58,7 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
         }
     }
+
     @DeleteMapping("/deleteUserById/{userId}")
     public ResponseEntity<?> deleteUser(@PathVariable("userId") @Min(value = 1, message = "User ID must be greater than or equal to 1") long id) {
         try {
