@@ -2,7 +2,8 @@ package com.example.springexceptionhandlingandvalidations.exception;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class ErrorDetails {
+public class ErrorDetails
+{
     public String getMessage() {
         return message;
     }
